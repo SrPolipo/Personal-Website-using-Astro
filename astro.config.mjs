@@ -14,10 +14,10 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   markdown: {
+    remarkPlugins: [remarkMath],
+		rehypePlugins: [rehypeKatex],
     shikiConfig: {
       theme: "css-variables",
     },
-    remarkPlugins: [remarkMath],
-		rehypePlugins: [rehypeKatex],
   },
 });

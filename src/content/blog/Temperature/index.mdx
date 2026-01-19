@@ -1,0 +1,51 @@
+---
+title: "Rediscovering Autoregressive models"
+description: "A short story on how I rediscovered the wheel"
+date: "2026-01-15"
+tags:
+  - Math
+  - Data
+draft: True
+---
+
+While I was on the metro, on my way back home from an Ergodic Theory exam, I started wondering about how I'd go about predicting
+tomorrow's average temperature from known temperature data. 
+
+This lead me to the following postulates about a model, based on my empiric experience:
+
+* The sequence of average temperatures should be a discrete-time stochastic process $(\tau_i)_i$, taking real values;
+* Today's temperature is heavily corrolated with yesterday's weather, and also the days before, but negligeably corrolated after long enough time.
+* The corrolation between $\tau_i$ and $\tau_{i+k}$ should only depend on $k$.
+
+This lead me into the following type of model:
+$$
+\tau_i = \sum_{k=1}^r c_{k} \tau_{i-k} + \epsilon_i
+$$
+Where the $c_k$ are constants and the $\epsilon_i$ are noise.
+Using standard techniques in dealing with convolutions we can linearize this equation, taking $k=3$ to simplify visualization this gives:
+$$
+\underbrace{\begin{bmatrix} \tau_{i-2}\\ \tau_{i-1}\\ \tau_i\end{bmatrix}}_{T_{i+1}}= 
+\underbrace{\begin{bmatrix}
+0&1&0\\
+0&0&1\\
+c_3&c_2&c_1
+\end{bmatrix}}_C
+\underbrace{\begin{bmatrix} \tau_{i-3}\\ \tau_{i-2}\\ \tau_{i-1}\end{bmatrix}}_{T_{i}} + \underbrace{\begin{bmatrix}0\\0\\\epsilon_i \end{bmatrix}}_{E_i} 
+$$
+Or in a more compact way, which is true for all $k$:
+$$
+T_{i+1} = CT_i + E_i
+$$
+At this point, solving for $C$ gave me:
+$$
+C = T_{i+1}T_i^{-1} - E_iT_i^{-1}
+$$
+from which it became apparent that, since $T_i$ can have very small eigenvalues, that estimation of $C$ through averages is probably not a good idea.
+Hence I had to completely scratch this idea for estimation.
+
+After reformulating the problem in terms of the noise:
+$$
+T_{i+1} - CT_i = E_i
+$$
+It becomes apparent, that we should choose $C$ such that it minimizes some norm on $E_i$, geometrically this would be the Frobenius norm.
+Hence, I was able to rediscover L
