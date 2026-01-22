@@ -35,5 +35,15 @@ const { title, description } = Astro.props;
     </main>
     <Footer />
     <Pagefind />
+    <script is:inline>
+  // This fix triggers every time you navigate between pages
+  document.addEventListener("astro:after-swap", () => {
+    const videos = document.querySelectorAll("video");
+    videos.forEach((video) => {
+      // Force Firefox to notice the video and load it
+      video.load();
+    });
+  });
+</script>
   </body>
 </html>

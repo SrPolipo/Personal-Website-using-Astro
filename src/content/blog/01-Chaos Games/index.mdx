@@ -14,14 +14,13 @@ In general, an IFS can described as a finite set of [contractive functions](http
 $$
 f_j: X \to X,
 $$
-where $X$ is a compact metric space, and the associated fractal $S$ for a generating subset $S_0$ is obtained iteratively through:
+where $X$ is a compact metric space. The associated fractal $S$, for a generating subset $S_0$, is obtained iteratively through:
 $$
 \begin{align*}
 S_{i+1} &= \bigcup_{j}  f_j(S_i),\\
 S &= \limsup_{i \to \infty} S_i.
 \end{align*}
 $$
-This is 
 My implementation is available on my [Github](https://github.com/SrPolipo), on the [manim-projects](https://github.com/SrPolipo/manim-projects/tree/main/chaosgame) repository.
 Here are some project examples:
 
@@ -30,9 +29,8 @@ A visualization of iterations of the Barnsley Fern, linearly interpolated with a
   width="640" 
   height="360" 
   controls 
-  preload="metadata" 
-  loading="lazy">
-  <source src="/videos/compressed_Barnsley.mp4" type="video/mp4" />
+  preload="auto">
+  <source src="/videos/faststart_barnsley.mp4" type="video/mp4" />
   Your browser does not support the video tag.
 </video>
 
@@ -42,8 +40,7 @@ And a visualization of the Vicsek fractal:
   width="640" 
   height="360" 
   controls 
-  preload="metadata" 
-  loading="lazy">
-  <source src="/videos/compressed_Vicsek.mp4" type="video/mp4" />
+  preload="auto">
+  <source src="/videos/faststart_vicsek.mp4" type="video/mp4" />
   Your browser does not support the video tag.
 </video>
