@@ -3,14 +3,14 @@ import type { Metadata, Site, Socials } from "@types";
 export const SITE: Site = {
   TITLE: "Rafael Hipolito",
   DESCRIPTION: "Personal website of Rafael Hipolito",
-  EMAIL: "rafaelhipolito@gmail.com",
+  EMAIL: "contact@rafaelhipolito.xyz",
   NUM_POSTS_ON_HOMEPAGE: 5,
-  NUM_PROJECTS_ON_HOMEPAGE: 3,
+  NUM_PROJECTS_ON_HOMEPAGE: 0,
 };
 
 export const HOME: Metadata = {
   TITLE: "Home",
-  DESCRIPTION: "Information about me and my website.",
+  DESCRIPTION: "Welcome to my website!",
 };
 
 export const BLOG: Metadata = {
