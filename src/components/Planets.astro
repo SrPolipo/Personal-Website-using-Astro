@@ -1,0 +1,81 @@
+---
+import Container from '../components/Container.astro';
+---
+
+<Container>
+<div class = solar-system-container>
+<canvas
+    id = "solar-system-canvas"
+    width = "600"
+    height = "400"
+/>
+</div>
+</Container>
+
+<script>
+import { Body, HelioVector, HelioDistance } from "astronomy-engine";
+
+// This function contains your drawing logic
+const drawSolarSystem = () => {
+    const date = new Date();
+    const canvas = document.getElementById('solar-system-canvas') as HTMLCanvasElement;
+    
+    // Safety check: make sure the canvas exists on the current page
+    if (!canvas) return;
+
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const ctx = canvas.getContext('2d');
+    
+    const planets = [
+        {body: Body.Mercury, name: "Mercury", color: 'gray', distance: 40, size: 4},
+        {body: Body.Venus, name: "Venus", color: 'orange', distance: 60, size: 6},
+        {body: Body.Earth, name: 'Earth', color: 'Blue', distance: 80, size: 6},
+        {body: Body.Mars, name: 'Mars', color: 'red', distance: 100, size: 5},
+        {body: Body.Jupiter, name: 'Jupiter', color: 'brown', distance: 130, size: 10},
+        {body: Body.Saturn, name: 'Saturn', color: 'goldenrod', distance: 160, size: 9},
+        {body: Body.Uranus, name: 'Uranus', color: 'lightblue', distance: 190, size: 7},
+        {body: Body.Neptune, name: 'Neptune', color: 'darkblue', distance: 220, size: 7},
+    ];
+
+    ctx?.clearRect(0,0,canvas.width, canvas.height);
+    ctx!.fillStyle = 'black';
+    ctx!.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw Sun
+    ctx!.beginPath();
+    ctx!.arc(centerX, centerY, 20, 0, 2 * Math.PI);
+    ctx!.fillStyle = 'yellow';
+    ctx!.fill();
+    
+    planets.forEach(element => {
+        const helioVector = HelioVector(element.body, date);
+        const distance = 80 + 30 * Math.log(HelioDistance(element.body, date));
+        const angle = Math.atan2(helioVector.y, helioVector.x);
+        
+        ctx!.beginPath();
+        ctx!.arc(
+            centerX + distance * Math.cos(angle), 
+            centerY + distance * Math.sin(angle), 
+            element.size, 0, 2 * Math.PI
+        );
+        ctx!.fillStyle = element.color;
+        ctx!.fill();
+    });
+    ctx!.fillStyle = "white";
+    ctx?.fillText(`Solar system representation at ${date}`, 10, canvas.height - 10);
+};
+
+// Re-run the code on every view transition
+document.addEventListener('astro:page-load', drawSolarSystem);
+</script>
+
+<style>
+    .solar-system-container {
+        padding: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+</style>

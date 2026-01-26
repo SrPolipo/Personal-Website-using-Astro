@@ -1,0 +1,24 @@
+---
+title: "Drawing the Solar system"
+description: "A visualization of the relative angles of the planets to the sun."
+date: "2026-01-26"
+
+draft: False
+---
+
+import Planets from '../../../components/Planets.astro';
+
+## Visualizing the Solar system
+An interesting fact about the Solar system is that since the orbits of the planets are nearly coplanar, we can draw a faithful picture of the relative angles of the planets to the sun on a
+two-dimensional plane.
+
+This surprising fact is what inspired me to create the following visualization of the Solar system, which is updated every time this page is loaded:
+
+
+<Planets></Planets>
+
+While the size of the planets is merely for illustration and is not to scale, the distance of the planets to the sun is accurate on a logarithmic scale and the angles between
+the planets and the sun correspond exactly to the angles of the night sky.
+
+### About the code
+Since this project is open-source, the relevant code for this visualization is available [here](https://github.com/SrPolipo/Personal-Website-using-Astro/blob/main/src/components/Planets.astro).
